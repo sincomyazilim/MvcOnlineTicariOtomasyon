@@ -1,0 +1,49 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<FaturaSatis>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Satış Faturaları Listesi</h2>
+<hr />
+<table class="table table-striped " style="margin-top:20px;">
+    <tr>
+        <th>Cari Adı</th>
+        <th>Ürün Adı</th>
+        <th>Miktar</th>
+        <th>BirimFiyat</th>
+        <th>Tutar</th>
+        <th>Seri Sıra No</th>
+
+        <th>Tc No</th>
+        <th>Vergi No</th>
+        <th>Tarih Saat</th>
+        <th>Iptal</th>
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+
+    </tr>
+    @foreach (var d in Model)
+    {
+<tr>
+    <td>@d.Cari.CariAd @d.Cari.CariSoyad</td>
+    <td>@d.Urun.UrunAd</td>
+    <td>@d.Miktar</td>
+    <td>@d.BirimFiyat ₺</td>
+    <td>@d.Tutar ₺</td>
+    <td>@d.FaturaSeriNo @d.FaturaSiraNo</td>
+    <td>@d.TcNo</td>
+    <td>@d.VergiNo</td>
+    <td>@d.Tarih.ToShortDateString() @d.Saat</td>
+
+
+
+    <td><a href="/FaturaSatis/FaturaIptal/@d.FaturaId" class="btn btn-danger">İptal</a></td>
+    <td><a href="/FaturaSatis/FaturaGetir/@d.FaturaId" class="btn btn-warning">Güncelle</a></td>
+
+    <td><a href="/FaturaSatis/FaturaKalem/@d.FaturaId" class="btn btn-info">Detay</a></td>
+</tr>
+    }
+
+</table>

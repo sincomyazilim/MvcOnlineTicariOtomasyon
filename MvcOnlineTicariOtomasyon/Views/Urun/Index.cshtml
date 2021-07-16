@@ -1,0 +1,93 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<br />
+@using (Html.BeginForm("Index", "Urun", FormMethod.Get))
+{
+    <p>
+        Ürün Adı: @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}
+<br />
+<tr>
+    <td><a href="/Urun/YeniUrun" class="btn btn-primary">Yeni Ürün</a></td>
+    <td><a href="/Urun/UrunListesi" class="btn btn-primary">Ürün Listesi Yazdır</a></td>
+</tr>
+<hr />
+<br />
+
+<table class="table table-striped">
+    <tr>
+
+        <th>Ürün</th>
+        <th>Marka</th>
+        <th>Stok</th>
+        <th>Alış Fiyatı </th>
+        <th>Satış Fiyatı</th>
+        <th>Kategori</th>
+        @if (User.IsInRole("A")) { 
+        <th>Stok Durumu</th>
+        <th>Stok Miktarı</th>
+        <th>Güncelle</th>}
+        <th>Satış Yap</th>
+
+    </tr>
+    @foreach (var u in Model)
+    {
+<tr>
+
+    <td>@u.UrunAd</td>
+    <td>@u.Marka</td>
+    <td>@u.Stok</td>
+    <td>@u.AlisFiyat ₺</td>
+    <td>@u.SatisFiyat ₺</td>
+    <td>@u.Kategori.KategoriAd</td>
+    @if (@u.Durum)
+    {
+
+        if (User.IsInRole("A"))
+        {
+            <td><a href="/Urun/UrunStokYok/@u.UrunId" class="btn btn-info">Stokta Var</a></td>
+            <td><a href="/Urun/MiktarEkle/@u.UrunId" class="btn btn-default" style="background-color:aqua">Miktar Ekle</a></td>
+            <td><a href="/Urun/UrunGetir/@u.UrunId" class="btn btn-warning">Güncelle</a></td>
+        }
+
+
+
+
+        <td><a href="/Urun/SatisYap/@u.UrunId" class="btn btn-success">Satış Yap</a></td>
+
+
+
+
+
+    }
+    else
+    {
+        <td><a href="/Urun/UrunStokVar/@u.UrunId" class="btn btn-danger">Stokta Yok</a></td>
+    }
+
+
+
+</tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }),
+new PagedListRenderOptions
+{
+    LiElementClasses = new List<String>
+    {
+        "page-link"
+}
+})
+
+
+

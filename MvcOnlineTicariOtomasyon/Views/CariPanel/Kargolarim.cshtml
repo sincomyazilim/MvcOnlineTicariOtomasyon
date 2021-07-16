@@ -1,0 +1,49 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<KargoDetay>
+@{
+    ViewBag.Title = "Kargolarim";
+    Layout = "~/Views/Shared/_CariLayout.cshtml";
+}
+
+<br />
+<h2>Kargolarım  </h2>
+<hr />
+
+<table class="table table-striped " style="margin-top:20px;">
+    <tr>
+        <th>Takip Kodu</th>
+        <th>Personel</th>
+        <th>Alıcı</th>
+        <th>Tarih</th>
+        <th>Adres</th>
+        <th>Açıklama</th>
+        <th>Kargo Durumu</th>
+
+        @*<th>Detaylar</th>*@
+
+    </tr>
+    @foreach (var d in Model)
+    {
+<tr>
+    <td>@d.TakipKodu</td>
+    <td>@d.Personel.PersonelAd @d.Personel.PersonelSoyad</td>
+    <td>@d.Cari.CariAd @d.Cari.CariSoyad</td>
+
+    <td>@d.Tarih.ToShortDateString()</td>
+    <td>@d.Cari.Adres</td>
+    <td>@d.Aciklama</td>
+    @if (d.Durum)
+    {
+        <td><a href="" class="btn btn-success">Teslim Aldım</a></td>
+    }
+    else
+    {
+        <td><a href="/CariPanel/KargoTesliAldim/@d.KargoDetayId" class="btn btn-danger">Teslim Aldın mı?</a></td>
+    }
+
+    @*<td><a href="/Kargo/DepartmanDetay/@d.KargoDetayId" class="btn btn-info">Detay</a></td>*@
+
+</tr>
+    }
+
+</table>

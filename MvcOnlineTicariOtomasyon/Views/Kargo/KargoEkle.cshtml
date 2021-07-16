@@ -1,0 +1,41 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.KargoDetay
+@{
+    ViewBag.Title = "KargoEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Kargo Ekle</h2>
+<hr />
+
+<form class="form-group" method="post">
+    @Html.Label("Takip Kodu ")
+    <input type="text" name="TakipKodu" value="@ViewBag.takipKodu" class="form-control" readonly="readonly" />
+    <br />
+    @Html.Label("Şatış Kodu ")
+    <input type="text" name="SatisId" value="@ViewBag.satisId" class="form-control" readonly="readonly" />
+    <br />
+    @Html.Label("Ürün")
+    <input type="text" name="UrunId" value="@ViewBag.urunId" class="form-control" readonly="readonly" />
+
+    <br />
+    @Html.Label("Cari ")
+    <input hidden type="text" name="CariId" value="@ViewBag.cariId" class="form-control" readonly="readonly" />
+    <input type="text" name="CariId" value="@ViewBag.cariAd" class="form-control" readonly="readonly" />
+    <br />
+    @*@Html.Label("Adres ")
+        <input type="text" name="Cari.Adres" value="@ViewBag.adres" class="form-control" readonly="readonly" />
+        <br />*@
+    @Html.Label("Gönderen Personel  ")
+    <input hidden type="text" name="PersonelId" value="@ViewBag.personelId" class="form-control" readonly="readonly" />
+    <input type="text" name="PersonelId" value="@ViewBag.personelAd" class="form-control" readonly="readonly" />
+    <br />
+
+    @Html.Label("Açıklama ")
+    @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control" })
+    <br />
+
+
+
+
+    <button class="btn btn-info">Kaydet</button>
+</form>

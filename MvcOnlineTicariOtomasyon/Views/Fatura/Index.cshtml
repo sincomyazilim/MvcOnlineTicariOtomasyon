@@ -1,0 +1,83 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Fatura>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Kesilen Faturalar </h2>
+<hr />
+<table class="table table-striped " style="margin-top:20px;">
+    <tr>
+
+        <th>Seri Sıra No</th>
+
+
+        <th>Vergi No</th>
+        <th>Tarih Saat</th>
+        
+        <th>Teslim Eden</th>
+        <th>Teslim Alan</th>
+        <th>Toplam</th>
+        <th>Iptal</th>
+        <th>Güncelle</th>
+  
+        
+        <th>Detaylar</th>
+
+    </tr>
+    @foreach (var d in Model)
+    {
+<tr>
+
+    <td>@d.FaturaSeriNo @d.FaturaSiraNo</td>
+
+
+    <td>@d.VergiNo</td>
+    <td>@d.Tarih.ToShortDateString() @d.Saat</td>
+    
+
+    <td>@d.TeslimEden</td>
+    <td>@d.TeslimAlan</td>
+    <td>@d.Toplam ₺</td>
+    <td><a href="/Fatura/FaturaIptal/@d.FaturaId" class="btn btn-danger">İptal</a></td>
+    <td><a href="/Fatura/FaturaGetir/@d.FaturaId" class="btn btn-warning">Güncelle</a></td>
+
+    <td><a href="/Fatura/FaturaKalem/@d.FaturaId" class="btn btn-info">Detay</a></td>
+</tr>
+    }
+
+</table>
+<a href="/Fatura/FaturaEkle" class="btn btn-primary">Yeni Fatura</a>
+@*<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#Modal1">Popup Penceresi</button>*@
+
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h3>Popup Diyalog Ekranı</h3> <button type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Seri No</td>
+                        <td>Sıra No</td>
+                        <td>Toplam</td>
+                    </tr>
+                    @foreach (var d in Model)
+                    {
+                        <tr>
+                            <td>@d.FaturaSeriNo</td>
+                            <td>@d.FaturaSiraNo</td>
+                            <td>@d.Toplam.</td>
+                        </tr>
+                    }
+                </table>
+               
+            </div>
+            
+        </div>
+
+    </div>
+</div>

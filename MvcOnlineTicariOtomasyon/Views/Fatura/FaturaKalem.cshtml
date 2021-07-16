@@ -1,0 +1,68 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<FaturaKalem>
+@{
+    ViewBag.Title = "FaturaKalem";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<br />
+<ol class="breadcrumb" mb-4>
+    <li class="breadcrumb-item active">Fatura No: @ViewBag.FaturaId</li>
+</ol>
+
+<table class="table table-striped " style="margin-top:20px;">
+    <tr>
+        <th>ID</th>
+        <th>Ürün Adı</th>
+        <th>Miktar</th>
+        <th>Birim Fiyat</th>
+        <th>Tutar</th>
+        <th>Açıklama</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+
+
+
+    </tr>
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.FaturaId</td>
+            <td>@d.UrunAdi</td>
+            <td>@d.Miktar</td>
+            <td>@d.BirimFiyat</td>
+            <td>@d.Tutar</td>
+            <td>@d.Aciklama</td>
+            <td><a href="/Fatura/FaturaKalemSil/@d.FaturaKalemId" class="btn btn-danger" id="FaturaSil">Sil</a></td>
+            <td><a href="/Fatura/FaturaKalemGetir/@d.FaturaKalemId" class="btn btn-warning">Güncelle</a></td>
+
+
+        </tr>
+    }
+
+</table>
+
+<a href="/Fatura/YeniFaturaKalem/@ViewBag.FaturaId" class="btn btn-primary">Fatura Kalem Ekle</a>
+
+@*<script>
+    $('#FaturaSil').click(function () {
+
+        swal({
+            title: "Silmek istediğinizden eminmisiniz?",
+            text: "Silindikten sonra, bu dosyayı kurtarmak mümkün olmayacaktır!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Puf!  dosyanız silindi!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal(" dosyanız güvende silemediniz!");
+                }
+            });
+    });
+</script>*@

@@ -1,0 +1,52 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.FaturaSatis
+@{
+    ViewBag.Title = "FaturaEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Satış Faturası Ekle</h2>
+<hr />
+<ol class="breadcrumb" mb-4>
+    <li class="breadcrumb-item active">Cari Adı: @ViewBag.CariAdi</li>
+</ol>
+<form class="form-group" method="post">
+    @Html.Label("Fatura Seri No ")
+    @Html.TextBoxFor(x => x.FaturaSeriNo, new { @class = "form-control" })
+
+    <br />
+    @Html.Label("Fatura Sıra No ")
+    @Html.TextBoxFor(x => x.FaturaSiraNo, new { @class = "form-control" })
+
+    <br />
+    @Html.Label("Saat ")
+    @Html.TextBoxFor(x => x.Saat, new { @class = "form-control" })
+    <br />
+    @Html.Label("Vergi Dairesi ")
+    @*@Html.TextBoxFor(x => x.Id, new { @class = "form-control" })*@
+    @Html.DropDownListFor(x => x.Id, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+
+
+
+    <br />
+    @Html.Label("Açıklama ")
+    @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+    <br />
+    <input hidden type="text" name="UrunId" value="@ViewBag.urunId" class="form-control" readonly="readonly" />
+    <input hidden type="text" name="SatisId" value="@ViewBag.satisId" class="form-control" readonly="readonly" />
+    <input hidden type="text" name="PersonelId" value="@ViewBag.personelId" class="form-control" readonly="readonly" />
+    <input hidden type="text" name="CariId" value="@ViewBag.cariId" class="form-control" readonly="readonly" />
+
+    <input hidden type="text" name="Miktar" value="@ViewBag.miktar" class="form-control" readonly="readonly" />
+    <input hidden type="text" name="BirimFiyat" value="@ViewBag.birimFiyat" class="form-control" readonly="readonly" />
+    <input hidden type="text" name="Tutar" value="@ViewBag.tutar" class="form-control" readonly="readonly" />
+
+    <input hidden type="text" name="VergiNo" value="@ViewBag.vergiNo" class="form-control" readonly="readonly" />
+
+
+    <input hidden type="text" name="TcNo" value="@ViewBag.tcNo" class="form-control" readonly="readonly" />
+
+    <button class="btn btn-info">Kaydet</button>
+</form>
+
+
+

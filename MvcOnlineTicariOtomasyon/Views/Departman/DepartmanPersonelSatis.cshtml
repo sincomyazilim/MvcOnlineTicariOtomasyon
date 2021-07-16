@@ -1,0 +1,61 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar;
+@model List<SatisHareket>
+@{
+    ViewBag.Title = "DepartmanPersonelSatis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2> Personel Satışı</h2>
+<br />
+<ol class="breadcrumb" mb-4>
+    <li class="breadcrumb-item active">Personel Adı: @ViewBag.dpersonel</li>
+</ol>
+<table class="table table-striped">
+    <tr>
+
+        <th>Ürün</th>
+        <th>Cari</th>
+        <th>Fiyat</th>
+        <th>Adet</th>
+        <th>Toplam</th>
+        <th>Tarih</th>
+        <th>Fatura Durumu</th>
+        <th>Kargola</th>
+
+    </tr>
+
+    @foreach (var s in Model)
+    {
+
+<tr>
+
+    <td>@s.Urun.UrunAd</td>
+    <td>@s.Cari.CariAd @s.Cari.CariSoyad </td>
+    <td>@s.Fiyat ₺</td>
+    <td>@s.Adet</td>
+    <td>@s.ToplamTutar ₺</td>
+    <td>@s.Tarih.ToShortDateString()</td>
+    @if (s.Durum)
+    {
+        <td><a href="" class="btn btn-success">Fatura Kesildi</a></td>
+        if (s.KargoDurum)
+        {
+            <td><a href="" class="btn btn-success">Kargolandı </a></td>
+        }
+        else
+        {
+            <td><a href="/Kargo/KargoEkle/@s.SatisId" class="btn btn-primary">Kargoya ver</a></td>
+        }
+    }
+    else
+    {
+        <td><a href="/FaturaSatis/FaturaEkle/@s.SatisId" class="btn btn-danger">Fatura Kes</a></td>
+    }
+
+
+</tr>
+    }
+
+</table>
+<a href="/Departman/PersonelSatisListesi/@ViewBag.dpersonelId" class="btn btn-primary">Yazdır</a>

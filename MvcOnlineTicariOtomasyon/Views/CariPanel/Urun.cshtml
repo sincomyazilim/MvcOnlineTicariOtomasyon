@@ -1,0 +1,81 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Urun>
+@{
+    ViewBag.Title = "Urun";
+    Layout = "~/Views/Shared/_CariLayout.cshtml";
+}
+
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<br />
+@using (Html.BeginForm("Index", "Urun", FormMethod.Get))
+{
+    <p>
+        Ürün Adı: @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}
+<br />
+<tr>
+    
+    <td><a href="/Urun/UrunListesi" class="btn btn-primary">Ürün Listesi Yazdır</a></td>
+</tr>
+<hr />
+<br />
+
+<table class="table table-striped">
+    <tr>
+
+        <th>Ürün</th>
+        <th>Marka</th>
+        <th>Stok</th>
+        <th>Alış Fiyatı </th>
+        <th>Satış Fiyatı</th>
+        <th>Kategori</th>
+        
+        
+        <th>Satış Yap</th>
+
+    </tr>
+    @foreach (var u in Model)
+    {
+        <tr>
+
+            <td>@u.UrunAd</td>
+            <td>@u.Marka</td>
+            <td>@u.Stok</td>
+            <td>@u.AlisFiyat ₺</td>
+            <td>@u.SatisFiyat ₺</td>
+            <td>@u.Kategori.KategoriAd</td>
+            @if (@u.Durum)
+            {
+                <td><a href="/CariPanel/SatisYap/@u.UrunId" class="btn btn-success">Alış Yap</a></td>
+
+            }
+            else
+            {
+                <td><a href="" class="btn btn-danger">Stokta Yok</a></td>
+            }
+
+
+
+        </tr>
+    }
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }),
+new PagedListRenderOptions
+{
+    LiElementClasses = new List<String>
+    {
+        "page-link"
+}
+})
+
+
+
+
+

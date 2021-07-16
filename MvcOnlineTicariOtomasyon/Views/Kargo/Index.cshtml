@@ -1,0 +1,76 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<KargoDetay>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2>Kargolarım  </h2>
+<hr />
+
+@using (Html.BeginForm("Index", "Kargo", FormMethod.Get))
+{
+    <p>
+        Kargo Takip Numarası: @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}
+<br />
+<table class="table table-striped " style="margin-top:20px;">
+    <tr>
+        <th>Takip Kodu</th>
+        <th>Personel</th>
+        <th>Alıcı</th>
+        <th>Tarih</th>
+        <th>Adres</th>
+        <th>Açıklama</th>
+        <th>Kargo Durumu</th>
+      
+
+       
+
+    </tr>
+    @foreach (var d in Model)
+    {
+<tr>
+    <td>@d.TakipKodu</td>
+    <td>@d.Personel.PersonelAd @d.Personel.PersonelSoyad</td>
+    <td>@d.Cari.CariAd @d.Cari.CariSoyad</td>
+
+    <td>@d.Tarih.ToShortDateString()</td>
+    <td>@d.Cari.Adres</td>
+    <td>
+      @d.Aciklama
+
+        @*@if (@d.Aciklama.Length < 30)
+        {
+            @d.Aciklama
+        }
+        else
+        {
+            @d.Aciklama.Substring(0, 30).ToString()
+        }*@
+
+
+
+    </td>
+    @if (d.Durum)
+    {
+        <td><a href="" class="btn btn-success">Teslim Edildi</a></td>
+    }
+    else
+    {
+        <td><a href="" class="btn btn-primary">Daha yolda</a></td>
+
+    }
+    
+
+
+</tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+ 

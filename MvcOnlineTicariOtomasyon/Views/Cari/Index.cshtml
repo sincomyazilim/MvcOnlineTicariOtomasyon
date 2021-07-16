@@ -1,0 +1,56 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Cari>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<table class="table table-striped " style="margin-top:20px;">
+    <tr>
+        <th>ID</th>
+        <th>Adı</th>
+        <th>Soyadı</th>
+        <th>Şehir</th>
+        <th>Email</th>
+        @if (User.IsInRole("A")) { 
+            <th>Durumu</th>
+        <th>Güncelle</th>
+        }
+        <th>Detaylar</th>
+
+    </tr>
+    @foreach (var d in Model)
+    {
+<tr>
+    <td>@d.CariId</td>
+    <td>@d.CariAd</td>
+    <td>@d.CariSoyad</td>
+    <td>@d.Il.Adi</td>
+    <td>@d.CariMail</td>
+    @if (d.Durum)
+    {
+        if (User.IsInRole("A"))
+        {
+            <td><a href="/Cari/CariPasif/@d.CariId" class="btn btn-success">Aktif</a></td>
+            <td><a href="/Cari/CariGetir/@d.CariId" class="btn btn-warning">Güncelle</a></td>
+        }
+        <td><a href="/Cari/MusteriSatis/@d.CariId" class="btn btn-info">Satış Geçmişi</a></td>
+    }
+    else
+    {
+        if (User.IsInRole("A"))
+        {
+            <td><a href="/Cari/CariAktif/@d.CariId" class="btn btn-danger">Pasif</a></td>
+        }
+        else
+        {
+            <td><a href="" class="btn btn-danger">Pasif</a></td>
+        }
+    }
+
+
+</tr>
+    }
+
+</table>
+<a href="/Cari/YeniCari" class="btn btn-primary">Yeni Cari</a>

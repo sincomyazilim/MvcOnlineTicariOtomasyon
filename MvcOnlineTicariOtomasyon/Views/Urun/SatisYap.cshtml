@@ -1,0 +1,49 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.SatisHareket
+@{
+    ViewBag.Title = "SatisYap";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Yeni Satış Sayfası</h2>
+<br />
+<form class="form-group" method="post">
+    @Html.Label("Ürün ")
+    <input type="text" name="UrunId" value="@ViewBag.dgr2" class="form-control" readonly="readonly" />
+    <br />
+    @Html.Label("Cari ")
+    @Html.TextBoxFor(x => x.CariId, new { @class = "form-control" })
+    <br />
+    @Html.Label("Personel ")
+    @Html.DropDownListFor(x => x.PersonelId, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+    <br />
+    @Html.Label("Adet ")
+    <input type="number" name="Adet" min="1" placeholder="Adet Giriniz" id="adet" onchange="carp();" class="form-control" />
+    <br />
+    @Html.Label("Fiyat ")
+    <input type="text" name="Fiyat" value="@ViewBag.dgr3" id="fiyat" onkeyup="carp();" class="form-control" />
+    <br />
+    @*<input type="date"  class="form-control"/>*@
+
+    @Html.Label("Toplam ")
+    <input type="text" name="ToplamTutar" id="toplam" class="form-control" on readonly />
+    <br />
+    <button class="btn btn-danger">Satış Yap</button>
+</form>
+<br />
+
+<script>
+    function carp() {
+        var say1 = document.getElementById('fiyat').value;
+        var say2 = document.getElementById('adet').value;
+        var sonuc = parseInt(say1) * parseInt(say2)
+        if (!isNaN(sonuc)) {
+            document.getElementById('toplam').value = sonuc;
+        }
+    }
+</script>
+
+
+
+
+

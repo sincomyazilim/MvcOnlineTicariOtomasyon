@@ -1,0 +1,41 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.FaturaSatis
+@{
+    ViewBag.Title = "FaturaGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Satış Faturası Güncelleme</h2>
+<br />
+
+@using (Html.BeginForm("FaturaGuncelle", "FaturaSatis", FormMethod.Post))
+{
+<div class="form-group">
+
+    @Html.HiddenFor(x => x.FaturaId)
+    @Html.Label("Fatura Seri No")
+    @Html.TextBoxFor(x => x.FaturaSeriNo, new { @class = "form-control" })
+    <br />
+    @Html.Label("Fatura Sıra No ")
+    @Html.TextBoxFor(x => x.FaturaSiraNo, new { @class = "form-control" })
+    <br />
+
+    @Html.Label("Saat ")
+    @Html.TextBoxFor(x => x.Saat, new { @class = "form-control" })
+    <br />
+    @Html.Label("Vergi Dairesi")
+    @Html.DropDownListFor(x => x.Id, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
+    <br />
+    @*@Html.Label("Vergi No")
+        @Html.TextBoxFor(x => x.VergiNo, new { @class = "form-control" })
+        <br />
+        @Html.Label("Tc No")
+        @Html.TextBoxFor(x => x.TcNo, new { @class = "form-control" })
+        <br />*@
+    @Html.Label("Açıklama ")
+    @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-warning">Güncelle</button>
+</div>
+}
+
